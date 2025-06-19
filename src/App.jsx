@@ -1,8 +1,14 @@
+import PictureDisplay from "./PictureDisplay.jsx"
+
 function App() {
 
   return (
+
     <>
-    <p className="bg-amber-300">Hello</p>
+      <div className="app-container"> {/*Container for App Elements*/}
+        <PictureDisplay img="src/assets/images/Einstein.jpg" />
+      </div>
+      
     </>
   )
 }
