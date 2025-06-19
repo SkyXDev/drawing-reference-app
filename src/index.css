@@ -3,7 +3,6 @@
 *{
   margin: 0;
   padding: 0;
-  background-color: linear-gradient(90deg,rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%)
 }
 
 
@@ -15,7 +14,8 @@
   left: 30px;
   right: 30px;
   border-radius: 12px;
-  background: linear-gradient(135deg,rgba(42, 123, 155, 1) 0%, rgb(113, 76, 128) 50%, rgb(43, 29, 51) 100%);
+  /*background: linear-gradient(135deg,rgb(204, 211, 176) 0%, rgb(183, 210, 207) 50%, rgb(136, 147, 160) 100%);*/
+  background: linear-gradient(135deg, rgb(255, 247, 239), rgb(236, 251, 255));
 }
 
 .picture-frame{
@@ -49,8 +49,65 @@
   top: 40px;
   bottom: 40px;
   right: 40px;
-  background-color: rgba(240, 255, 255, 0.418);
+  background-color: rgba(157, 157, 157, 0.514);
   z-index: 1;
   border-radius: 8px;
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 60px;
+}
+
+
+
+.next-btn {
+  text-wrap: nowrap;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #75acb4;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 300px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.next-btn span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.next-btn span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.next-btn:hover span {
+  padding-right: 25px;
+}
+
+.next-btn:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+#selector{
+  width: 200px;
+}
+
+h2{
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 60px;
+  font-weight: bold;
 }
