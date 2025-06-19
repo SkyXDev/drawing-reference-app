@@ -3,22 +3,25 @@
 *{
   margin: 0;
   padding: 0;
+  background-color: linear-gradient(90deg,rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%)
 }
 
 
 
 .app-container{
   position: absolute;
-  top: 10px;
-  bottom: 10px;
-  left: 10px;
-  right: 10px;
-  border-radius: 8px;
-  background-color: azure;
+  top: 30px;
+  bottom: 30px;
+  left: 30px;
+  right: 30px;
+  border-radius: 12px;
+  background: linear-gradient(135deg,rgba(42, 123, 155, 1) 0%, rgb(113, 76, 128) 50%, rgb(43, 29, 51) 100%);
 }
 
 .picture-frame{
-  position: relative;
+  position: absolute;
+  top: 15%;
+  left: 10%;
   width: 400px;
   aspect-ratio: 3 / 4;
   overflow: hidden;
@@ -35,4 +38,19 @@
 }
 .picture-frame:hover img{
   transform: scale(1.05);
+}
+
+
+
+
+.controls{
+  position: absolute;
+  width: 50%;
+  top: 40px;
+  bottom: 40px;
+  right: 40px;
+  background-color: rgba(240, 255, 255, 0.418);
+  z-index: 1;
+  border-radius: 8px;
+  
 }
