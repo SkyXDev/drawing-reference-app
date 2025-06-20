@@ -3,9 +3,6 @@ import Modal from "./Modal.jsx"
 import { useEffect, useState } from 'react';
 import imageList from '../public/images/imageList.json' with { type: 'json' };
 
-console.log(imageList["Photos"])
-console.log(imageList["Photos"].at(5))
-
 const folderOptions = [
   'Photos',
   'Traditional Art',
@@ -25,14 +22,7 @@ function getRandomIntInclusive(min, max) {
 
 function App() {
   const [selectedFolder, setSelectedFolder] = useState('Photos')
-  const [randomImage, setRandomImage] = useState(imageList[selectedFolder].at(5))
-  
-
-
-
-  
-  
-  
+  const [randomImage, setRandomImage] = useState(imageList[selectedFolder].at(getRandomIntInclusive(0, imageList[selectedFolder].length)))
   function nextButtonClick(){
     setRandomImage(imageList[selectedFolder].at(getRandomIntInclusive(0, imageList[selectedFolder].length)))
     console.log(randomImage)
@@ -41,7 +31,7 @@ function App() {
   function selectChange(e){
     console.log('Select Target value: ', e.target.value)
     setSelectedFolder(e.target.value)
-    console.log(selectedFolder)
+    setRandomImage(imageList[e.target.value].at(getRandomIntInclusive(0, imageList[e.target.value].length)))
   }
 
   return (
@@ -53,7 +43,7 @@ function App() {
         </div>
         <div className="controls">
           <h2>Drawing References</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ullamcorper, ipsum sit amet pretium consectetur, enim lacus pharetra nulla, et gravida ligula tellus egestas est. Sed id pharetra augue, et hendrerit sapien. Nulla a lorem suscipit, eleifend augue ut, pharetra leo.</p>
+          <p>Choose a theme and find inspirations.</p>
           <select
         id="selector"
         value={selectedFolder}
@@ -72,7 +62,7 @@ function App() {
           }}><span>Next picture</span></button>
         </div>
       </div>
-      <Modal img="src/assets/images/Einstein.jpg"/>
+      <Modal img={`public/images/${selectedFolder}/${randomImage}`}/>
     </>
   )
 }
