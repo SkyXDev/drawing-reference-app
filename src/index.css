@@ -16,13 +16,22 @@
   border-radius: 12px;
   /*background: linear-gradient(135deg,rgb(204, 211, 176) 0%, rgb(183, 210, 207) 50%, rgb(136, 147, 160) 100%);*/
   background: linear-gradient(135deg, rgb(255, 247, 239), rgb(236, 251, 255));
+  display: grid;
+  grid-template-columns: 1fr 1fr 20px;
+  grid-gap: 50px;
+  justify-content: center;
+  align-content: center;
+}
+
+.picture-display-container{
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .picture-frame{
-  position: absolute;
-  top: 15%;
-  left: 10%;
-  width: 400px;
+  height: 70vh;
   aspect-ratio: 3 / 4;
   overflow: hidden;
   background: #ddd;
@@ -44,11 +53,7 @@
 
 
 .controls{
-  position: absolute;
-  width: 50%;
-  top: 40px;
-  bottom: 40px;
-  right: 40px;
+  height: 80vh;
   background-color: rgba(157, 157, 157, 0.514);
   z-index: 1;
   border-radius: 8px;
