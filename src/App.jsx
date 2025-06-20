@@ -2,13 +2,14 @@ import PictureDisplay from "./PictureDisplay.jsx"
 import Modal from "./Modal.jsx"
 import { useEffect, useState } from 'react';
 import imageList from '../public/images/imageList.json' with { type: 'json' };
+import { folders as folderOptions } from "../generateImageList.cjs";
 
-const folderOptions = [
+/*const folderOptions = [
   'Photos',
   'Traditional Art',
   'Digital Art',
   'Scenes',
-];
+];*/
 
 //const imageList = JSON.parse('')
 
