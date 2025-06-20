@@ -26,11 +26,9 @@ function App() {
   const [randomImage, setRandomImage] = useState(imageList[selectedFolder].at(getRandomIntInclusive(0, imageList[selectedFolder].length)))
   function nextButtonClick(){
     setRandomImage(imageList[selectedFolder].at(getRandomIntInclusive(0, imageList[selectedFolder].length)))
-    console.log(randomImage)
   }
 
   function selectChange(e){
-    console.log('Select Target value: ', e.target.value)
     setSelectedFolder(e.target.value)
     setRandomImage(imageList[e.target.value].at(getRandomIntInclusive(0, imageList[e.target.value].length)))
   }
