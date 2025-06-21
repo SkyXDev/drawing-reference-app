@@ -1,5 +1,5 @@
 import PictureDisplay from "./PictureDisplay.jsx"
-import Modal from "./Modal.jsx"
+//import Modal from "./Modal.jsx"
 import { useEffect, useState } from 'react';
 import imageList from '../public/images/imageList.json' with { type: 'json' };
 import { folders as folderOptions } from "../generateImageList.cjs";
@@ -24,6 +24,9 @@ function getRandomIntInclusive(min, max) {
 function App() {
   const [selectedFolder, setSelectedFolder] = useState('Photos')
   const [randomImage, setRandomImage] = useState(imageList[selectedFolder].at(getRandomIntInclusive(0, imageList[selectedFolder].length)))
+
+  const [modalOpened, setModalOpened] = useState(false)
+
   function nextButtonClick(){
     setRandomImage(imageList[selectedFolder].at(getRandomIntInclusive(0, imageList[selectedFolder].length)))
   }
@@ -33,12 +36,28 @@ function App() {
     setRandomImage(imageList[e.target.value].at(getRandomIntInclusive(0, imageList[e.target.value].length)))
   }
 
+  function pictureClicked(){
+    console.log('hello')
+    setModalOpened(true)
+    document.addEventListener('keydown', handleKeyDown);
+  }
+  function closeModal(){
+    setModalOpened(false)
+    document.removeEventListener('keydown', handleKeyDown);
+  }
+
+  const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        closeModal()
+      }
+    };
   return (
 
     <>
       <div className="app-container"> {/*Container for App Elements*/}
-        <div className="picture-display-container">
-          <PictureDisplay img={`public/images/${selectedFolder}/${randomImage}`}/>
+        <div className="picture-display-container" onClick={pictureClicked}>
+          <PictureDisplay 
+          img={`public/images/${selectedFolder}/${randomImage}`}/>
         </div>
         <div className="controls">
           <h2>Drawing References</h2>
@@ -61,7 +80,10 @@ function App() {
           }}><span>Next picture</span></button>
         </div>
       </div>
-      <Modal img={`public/images/${selectedFolder}/${randomImage}`}/>
+      {/*<Modal img={`public/images/${selectedFolder}/${randomImage}`} opened={modalOpened}/>*/}
+      <div className="modal" id='modal' style={{display: `${modalOpened ? 'flex ' : 'none'}`}}>  <span className="close" onClick={closeModal}>&times;</span>
+          <img src={`public/images/${selectedFolder}/${randomImage}`} alt="Image" />
+      </div>
     </>
   )
 }

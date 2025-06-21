@@ -24,7 +24,8 @@
 }
 
 .picture-display-container{
-  
+  height: 70vh;
+  margin-top: 5vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -120,4 +121,32 @@ h2{
 p{
   font-family: 'Times New Roman', Times, serif;
   font-size: 18px;
+}
+
+.modal{
+  /*display: flex;*/
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  align-items: center;
+}
+.modal img{
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 8px;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: #ffffff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
 }
