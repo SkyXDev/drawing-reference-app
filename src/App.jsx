@@ -19,21 +19,45 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-
-
+let prevPictures = []
+let startingImage = imageList['Photos'].at(getRandomIntInclusive(0, imageList['Photos'].length))
+prevPictures.push(startingImage)
 function App() {
+  
+  
   const [selectedFolder, setSelectedFolder] = useState('Photos')
-  const [randomImage, setRandomImage] = useState(imageList[selectedFolder].at(getRandomIntInclusive(0, imageList[selectedFolder].length)))
+  
+  const [randomImage, setRandomImage] = useState(startingImage) //imageList[selectedFolder].at(getRandomIntInclusive(0, imageList[selectedFolder].length))
 
   const [modalOpened, setModalOpened] = useState(false)
 
+
+  function getLastImage(){
+    if ((prevPictures.length - 2) > 0){
+      console.log(prevPictures.at(prevPictures.length - 2)) 
+      setRandomImage(prevPictures.at(prevPictures.length - 2))
+      prevPictures.pop()
+    } else {
+      setRandomImage(prevPictures.at(0))
+    }
+    
+  }
+
+  function nextPicture(){
+    let image = imageList[selectedFolder].at(getRandomIntInclusive(0, imageList[selectedFolder].length))
+    
+    setRandomImage(image)
+    prevPictures.push(image)
+    console.log('prevPictures: ', prevPictures)
+  }
   function nextButtonClick(){
-    setRandomImage(imageList[selectedFolder].at(getRandomIntInclusive(0, imageList[selectedFolder].length)))
+    nextPicture()
   }
 
   function selectChange(e){
     setSelectedFolder(e.target.value)
-    setRandomImage(imageList[e.target.value].at(getRandomIntInclusive(0, imageList[e.target.value].length)))
+    setRandomImage(imageList[e.target.value].at(getRandomIntInclusive(0, imageList[e.target.value].length))) //returns a string
+    
   }
 
   function pictureClicked(){
@@ -51,7 +75,10 @@ function App() {
         closeModal()
       }
       if (event.key === 'ArrowRight') {
-        nextButtonClick()
+        nextPicture()
+      }
+      if (event.key === 'ArrowLeft') {
+        getLastImage()
       }
     };
   return (
