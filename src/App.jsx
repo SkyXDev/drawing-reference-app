@@ -11,8 +11,6 @@ import Background from "./Background.jsx";
   'Scenes',
 ];*/
 
-//const imageList = JSON.parse('')
-
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min); // Ensures min is an integer
   max = Math.floor(max); // Ensures max is an integer
@@ -23,8 +21,6 @@ let prevPictures = []
 let startingImage = imageList['Photos'].at(getRandomIntInclusive(0, imageList['Photos'].length))
 prevPictures.push(startingImage)
 function App() {
-  
-  
   const [selectedFolder, setSelectedFolder] = useState('Photos')
   
   const [randomImage, setRandomImage] = useState(startingImage) //imageList[selectedFolder].at(getRandomIntInclusive(0, imageList[selectedFolder].length))
@@ -60,6 +56,12 @@ function App() {
     setRandomImage(image) //returns a string
     prevPictures.length = 0
     prevPictures.push(image)
+    const frame = document.querySelector('.picture-frame')
+    if(e.target.value === 'Scenes'){
+      frame.style.aspectRatio = "1/1";
+    }else{
+      frame.style.aspectRatio = "3/4";
+    }
   }
 
   function pictureClicked(){
@@ -95,26 +97,28 @@ function App() {
           <h2>Drawing References</h2>
           <p>Choose a theme and find inspirations. <br /> Fuel your art. Find the perfect pose, scene, or mood. </p>
           <select
-        id="selector"
-        value={selectedFolder}
-        onChange={(e) => {
-          selectChange(e)
-        }}
-      >
-        {folderOptions.map((folder) => (
-          <option key={folder} value={folder}>
-            {folder}
-          </option>
-        ))}
-      </select>
+            id="selector"
+            value={selectedFolder}
+            onChange={(e) => {
+              selectChange(e)
+            }}
+          >
+            {folderOptions.map((folder) => (
+              <option key={folder} value={folder}>
+                {folder}
+              </option>
+            ))}
+          </select>
           <button className="next-btn" onClick={() => {
             nextButtonClick()
-          }}><span>Next picture</span></button>
+          }}>
+            <span>Next picture</span>
+          </button>
         </div>
       </div>
-      {/*<Modal img={`public/images/${selectedFolder}/${randomImage}`} opened={modalOpened}/>*/}
-      <div className="modal" id='modal' style={{display: `${modalOpened ? 'flex ' : 'none'}`}}>  <span className="close" onClick={closeModal}>&times;</span>
-          <img src={`public/images/${selectedFolder}/${randomImage}`} alt="Image" />
+      <div className="modal" id='modal' style={{display: `${modalOpened ? 'flex ' : 'none'}`}}>
+        <span className="close" onClick={closeModal}>&times;</span>
+        <img src={`public/images/${selectedFolder}/${randomImage}`} alt="Image" />
       </div>
     </>
   )
