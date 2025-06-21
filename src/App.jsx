@@ -33,10 +33,11 @@ function App() {
 
 
   function getLastImage(){
-    if ((prevPictures.length - 2) > 0){
-      console.log(prevPictures.at(prevPictures.length - 2)) 
+    if (prevPictures.at(prevPictures.length - 2)){
       setRandomImage(prevPictures.at(prevPictures.length - 2))
-      prevPictures.pop()
+      if (prevPictures.length > 1){
+        prevPictures.pop()
+      }
     } else {
       setRandomImage(prevPictures.at(0))
     }
@@ -48,7 +49,6 @@ function App() {
     
     setRandomImage(image)
     prevPictures.push(image)
-    console.log('prevPictures: ', prevPictures)
   }
   function nextButtonClick(){
     nextPicture()
@@ -63,7 +63,6 @@ function App() {
   }
 
   function pictureClicked(){
-    console.log('hello')
     setModalOpened(true)
     document.addEventListener('keydown', modalHandleKeyDown);
   }
@@ -82,6 +81,7 @@ function App() {
       if (event.key === 'ArrowLeft') {
         getLastImage()
       }
+
     };
   return (
 
