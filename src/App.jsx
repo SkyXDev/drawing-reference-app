@@ -39,16 +39,19 @@ function App() {
   function pictureClicked(){
     console.log('hello')
     setModalOpened(true)
-    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keydown', modalHandleKeyDown);
   }
   function closeModal(){
     setModalOpened(false)
-    document.removeEventListener('keydown', handleKeyDown);
+    document.removeEventListener('keydown', modalHandleKeyDown);
   }
 
-  const handleKeyDown = (event) => {
+  const modalHandleKeyDown = (event) => {
       if (event.key === 'Escape') {
         closeModal()
+      }
+      if (event.key === 'ArrowRight') {
+        nextButtonClick()
       }
     };
   return (
