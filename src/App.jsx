@@ -56,8 +56,10 @@ function App() {
 
   function selectChange(e){
     setSelectedFolder(e.target.value)
-    setRandomImage(imageList[e.target.value].at(getRandomIntInclusive(0, imageList[e.target.value].length))) //returns a string
-    
+    let image = imageList[e.target.value].at(getRandomIntInclusive(0, imageList[e.target.value].length))
+    setRandomImage(image) //returns a string
+    prevPictures.length = 0
+    prevPictures.push(image)
   }
 
   function pictureClicked(){
