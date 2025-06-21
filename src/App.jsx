@@ -1,8 +1,8 @@
 import PictureDisplay from "./PictureDisplay.jsx"
-//import Modal from "./Modal.jsx"
 import { useEffect, useState } from 'react';
 import imageList from '../public/images/imageList.json' with { type: 'json' };
 import { folders as folderOptions } from "../generateImageList.cjs";
+import Background from "./Background.jsx";
 
 /*const folderOptions = [
   'Photos',
@@ -84,8 +84,8 @@ function App() {
 
     };
   return (
-
     <>
+    <Background img={`public/images/${selectedFolder}/${randomImage}`}/>
       <div className="app-container"> {/*Container for App Elements*/}
         <div className="picture-display-container" onClick={pictureClicked}>
           <PictureDisplay 
@@ -93,7 +93,7 @@ function App() {
         </div>
         <div className="controls">
           <h2>Drawing References</h2>
-          <p>Choose a theme and find inspirations.</p>
+          <p>Choose a theme and find inspirations. <br /> Fuel your art. Find the perfect pose, scene, or mood. </p>
           <select
         id="selector"
         value={selectedFolder}

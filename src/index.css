@@ -3,6 +3,7 @@
 *{
   margin: 0;
   padding: 0;
+
 }
 
 
@@ -15,7 +16,7 @@
   right: 30px;
   border-radius: 12px;
   /*background: linear-gradient(135deg,rgb(204, 211, 176) 0%, rgb(183, 210, 207) 50%, rgb(136, 147, 160) 100%);*/
-  background: linear-gradient(135deg, rgb(255, 247, 239), rgb(236, 251, 255));
+  background: linear-gradient(135deg, rgba(255, 247, 239, 0.95), rgba(236, 251, 255, 0.75));
   display: grid;
   grid-template-columns: 1fr 1fr 20px;
   grid-gap: 50px;
@@ -68,6 +69,7 @@
 
 
 .next-btn {
+  font-family: 'Times New Roman', Times, serif;
   text-wrap: nowrap;
   display: inline-block;
   border-radius: 4px;
@@ -110,6 +112,14 @@
 
 #selector{
   width: 200px;
+  color: black;
+  background-color: #FFFFFF;
+  height: 40px;
+  border-radius: 4px;
+}
+
+#selector:focus{
+  border: 2px solid black;
 }
 
 h2{
@@ -120,7 +130,9 @@ h2{
 
 p{
   font-family: 'Times New Roman', Times, serif;
-  font-size: 18px;
+  font-size: 20px;
+  text-align: center;
+  font-weight: 400;
 }
 
 .modal{
@@ -149,4 +161,11 @@ p{
   font-size: 40px;
   font-weight: bold;
   cursor: pointer;
+}
+
+.background-img{
+  width: 100%;
+  z-index: -2;
+  filter: blur(16px) saturate(30%);
+  transition: all .3s ease-in-out;
 }
