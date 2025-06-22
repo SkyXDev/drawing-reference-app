@@ -18,48 +18,56 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-let prevPictures = []
-let startingImage = imageList['Photos'].at(getRandomIntInclusive(0, imageList['Photos'].length))
-prevPictures.push(startingImage)
+let imageArray = []
+for (let i = 0; i < 512; i++) {
+  // Code to be executed 512 times
+  imageArray.push(imageList['Photos'].at(getRandomIntInclusive(0, imageList['Photos'].length)))
+}
+
+
 function App() {
-  const [time, setTime] = useState(5000);     // Selected session duration in ms
+  const [arrayPos, setArrayPos] = useState(0)
+  const [time, setTime] = useState(5000);   
 
 
   const [selectedFolder, setSelectedFolder] = useState('Photos')
   
-  const [randomImage, setRandomImage] = useState(startingImage) //imageList[selectedFolder].at(getRandomIntInclusive(0, imageList[selectedFolder].length))
+  const [randomImage, setRandomImage] = useState(imageArray.at(arrayPos)) 
 
   const [modalOpened, setModalOpened] = useState(false)
 
 
-  function getLastImage(){
-    if (prevPictures.at(prevPictures.length - 2)){
-      setRandomImage(prevPictures.at(prevPictures.length - 2))
-      if (prevPictures.length > 1){
-        prevPictures.pop()
-      }
-    } else {
-      setRandomImage(prevPictures.at(0))
-    }
-    
-  }
 
-  function nextPicture(){
-    let image = imageList[selectedFolder].at(getRandomIntInclusive(0, imageList[selectedFolder].length))
-    
-    setRandomImage(image)
-    prevPictures.push(image)
+  function nextPicture() {
+    setArrayPos(pos => {
+      const newPos = pos + 1;
+      setRandomImage(imageArray.at(newPos));
+      return newPos;
+    });
   }
+  function lastPicture() {
+    setArrayPos(pos => {
+      const newPos = pos - 1;
+      setRandomImage(imageArray.at(newPos));
+      return newPos;
+    });
+  }
+  
+
   function nextButtonClick(){
     nextPicture()
   }
+  
 
   function selectChange(e){
     setSelectedFolder(e.target.value)
-    let image = imageList[e.target.value].at(getRandomIntInclusive(0, imageList[e.target.value].length))
-    setRandomImage(image) //returns a string
-    prevPictures.length = 0
-    prevPictures.push(image)
+    imageArray.length = 0
+    for (let i = 0; i < 512; i++) {
+      // Code to be executed 512 times
+      imageArray.push(imageList[e.target.value].at(getRandomIntInclusive(0, imageList[e.target.value].length)))
+    }
+    setArrayPos(0)
+    setRandomImage(imageArray.at(0))
     const frame = document.querySelector('.picture-frame')
     if(e.target.value === 'Scenes'){
       frame.style.aspectRatio = "1/1";
@@ -84,10 +92,15 @@ function App() {
       if (event.key === 'ArrowRight') {
         nextPicture()
       }
-      if (event.key === 'ArrowLeft') {
-        getLastImage()
+      if (event.key === 'ArrowLeft') {     
+        lastPicture()
       }
-
+      if (event.key === 'd' || event.key === 'D') {
+        nextPicture()
+      }
+      if (event.key === 'a' || event.key === 'A') {     
+        lastPicture()
+      }
     };
 
   const handleRadioChange = (e) => {
