@@ -4,12 +4,13 @@ import imageList from '../public/images/imageList.json' with { type: 'json' };
 import { folders as folderOptions } from "../generateImageList.cjs";
 import Background from "./Background.jsx";
 
-/*const folderOptions = [
-  'Photos',
-  'Traditional Art',
-  'Digital Art',
-  'Scenes',
-];*/
+const sessionOptions = [
+  { label: '30s', value: 5000 },
+  { label: '1m', value: 60000 },
+  { label: '1m', value: 120000 },
+  { label: '5m', value: 300000 },
+  { label: '30m', value: 1800000 },
+];
 
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min); // Ensures min is an integer
@@ -21,6 +22,9 @@ let prevPictures = []
 let startingImage = imageList['Photos'].at(getRandomIntInclusive(0, imageList['Photos'].length))
 prevPictures.push(startingImage)
 function App() {
+  const [time, setTime] = useState(5000);     // Selected session duration in ms
+
+
   const [selectedFolder, setSelectedFolder] = useState('Photos')
   
   const [randomImage, setRandomImage] = useState(startingImage) //imageList[selectedFolder].at(getRandomIntInclusive(0, imageList[selectedFolder].length))
@@ -85,6 +89,12 @@ function App() {
       }
 
     };
+
+  const handleRadioChange = (e) => {
+    setTime(Number(e.target.value)); // Convert value to number (it's a string by default)
+  };
+
+  
   return (
     <>
     <Background img={`public/images/${selectedFolder}/${randomImage}`}/>
@@ -96,6 +106,25 @@ function App() {
         <div className="controls">
           <h2>Drawing References</h2>
           <p>Choose a theme and find inspirations. <br /> Fuel your art. Find the perfect pose, scene, or mood. </p>
+          <div className="time-select">
+            <p className="mt-2">Select session time</p>
+            <div className="flex flex-wrap gap-4">
+              {sessionOptions.map((option) => (
+                <label key={option.value} className="block">
+                <input
+                  type="radio"
+                  name="time-select"
+                  value={option.value}
+                  checked={time === option.value}
+                  onChange={handleRadioChange}
+                  className="mr-2"
+                />
+                {option.label}
+                </label>
+              ))}
+            </div>
+            <p className="mt-2">You selected <strong>{time / 1000}s</strong> per session</p>
+          </div>
           <select
             id="selector"
             value={selectedFolder}
