@@ -111,6 +111,7 @@
 }
 
 #selector{
+  cursor: pointer;
   width: 200px;
   color: black;
   background-color: #FFFFFF;

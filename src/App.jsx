@@ -121,7 +121,7 @@ function App() {
         <img src={`public/images/${selectedFolder}/${randomImage}`} alt="Image" />
       </div>
     </>
-  )
-}
+  );
+};
 
 export default App
