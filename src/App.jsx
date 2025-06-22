@@ -116,10 +116,10 @@ function App() {
           </button>
         </div>
       </div>
-      <div className="modal" id='modal' style={{display: `${modalOpened ? 'flex ' : 'none'}`}}>
+      {modalOpened ? <div className="modal" id='modal' style={{display: `${modalOpened ? 'flex ' : 'none'}`}}>
         <span className="close" onClick={closeModal}>&times;</span>
         <img src={`public/images/${selectedFolder}/${randomImage}`} alt="Image" />
-      </div>
+      </div> : <></>}
     </>
   );
 };
