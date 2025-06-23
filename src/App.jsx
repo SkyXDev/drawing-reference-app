@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import imageList from '../public/images/imageList.json' with { type: 'json' };
 import { folders as folderOptions } from "../generateImageList.cjs";
 import Background from "./Background.jsx";
+import { Play, Pause, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const sessionOptions = [
   { label: '30s', value: 30000 },
@@ -37,7 +38,7 @@ for (let i = 0; i < 512; i++) {
 
 function App() {
   const [arrayPos, setArrayPos] = useState(0)
-  const [time, setTime] = useState(5000);   
+  const [time, setTime] = useState(30000);   
   const [useTimer, setUseTimer] = useState(false);
 
   const [selectedFolder, setSelectedFolder] = useState('Photos')
@@ -49,6 +50,7 @@ function App() {
 
 
   function nextPicture() {
+    tapSound()
     setArrayPos(pos => {
       const newPos = pos + 1;
       setRandomImage(imageArray.at(newPos));
@@ -56,6 +58,7 @@ function App() {
     });
   }
   function lastPicture() {
+    tapSound()
     setArrayPos(pos => {
       const newPos = pos - 1;
       setRandomImage(imageArray.at(newPos));
@@ -117,6 +120,12 @@ function App() {
     setTime(Number(e.target.value)); // Convert value to number (it's a string by default)
   };
 
+
+
+  const tapSound = () => {
+    const audio = new Audio('../public/mixkit-on-or-off-light-switch-tap-2585.wav'); 
+    audio.play();
+  };
   
   return (
     <>
@@ -185,8 +194,16 @@ function App() {
       {modalOpened ? <div className="modal" id='modal' style={{display: `${modalOpened ? 'flex ' : 'none'}`}}>
         <span className="close" onClick={closeModal}>&times;</span>
         <img src={`public/images/${selectedFolder}/${randomImage}`} alt="Image" />
-        <div className="modalcontrols">
-          
+        <div className="modal-controls">
+          <button className="hover:bg-white/20 rounded-full p-2 transition cursor-pointer" onClick={lastPicture}>
+            <ChevronLeft className="w-10 h-10"/>
+          </button>
+          <button className="hover:bg-white/20 rounded-full p-2 transition cursor-pointer">
+            <Pause className="w-10 h-10"/>
+          </button>
+          <button className="hover:bg-white/20 rounded-full p-2 transition cursor-pointer" onClick={nextPicture}>
+            <ChevronRight className="w-10 h-10"/>
+          </button>
         </div>
       </div> : <></>}
     </>
