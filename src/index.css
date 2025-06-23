@@ -196,3 +196,25 @@ p{
   opacity: 1;
 }
 
+.stopwatch{
+  color: #FFFFFF;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  height: 70px;
+  width: 200px;
+  bottom: 60px;
+  right: 40px;
+  border-radius: 12px;
+  transition: opacity 0.6s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 5;
+  border-radius: 35px;
+  font-size: 24px;
+  transition: all .3s;
+}
+
+.stopwatch:hover{
+  background-color: rgba(70, 70, 70, 0.5);
+}

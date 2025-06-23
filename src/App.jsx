@@ -4,12 +4,13 @@ import imageList from '../public/images/imageList.json' with { type: 'json' };
 import { folders as folderOptions } from "../generateImageList.cjs";
 import Background from "./Background.jsx";
 import { Play, Pause, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useCountdownTimer } from 'use-countdown-timer';
 
 const sessionOptions = [
   { label: '30s', value: 30000 },
-  { label: '1m', value: 60000 },
+  { label: '60s', value: 60000 },
   { label: '2m', value: 120000 },
-  { label: '5m', value: 300000 },
+  { label: '10m', value: 300000 },
   { label: '30m', value: 1800000 },
 ];
 
@@ -19,8 +20,25 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
+function formatTime(seconds) {
+  const hrs = Math.floor(seconds / 3600);
+  const mins = Math.floor((seconds % 3600) / 60);
+  const secs = seconds % 60;
+
+  const paddedMins = String(mins).padStart(2, '0');
+  const paddedSecs = String(secs).padStart(2, '0');
+
+  if (hrs > 0) {
+    const paddedHrs = String(hrs).padStart(2, '0');
+    return `${paddedHrs}:${paddedMins}:${paddedSecs}`;
+  } else {
+    return `${paddedMins}:${paddedSecs}`;
+  }
+}
+
+
 let imageArray = []
-/*
+
 function shuffleArray(array) {
   const newArray = [...array]; // copy to avoid modifying original
   for (let i = newArray.length - 1; i > 0; i--) {
@@ -28,7 +46,8 @@ function shuffleArray(array) {
     [newArray[i], newArray[j]] = [newArray[j], newArray[i]]; // swap
   }
   return newArray;
-}*/
+}
+
 
 for (let i = 0; i < 512; i++) {
   // Code to be executed 512 times
@@ -47,10 +66,26 @@ function App() {
 
   const [modalOpened, setModalOpened] = useState(false)
 
+  const {
+    countdown,
+    start,
+    pause,
+    reset,
+    isRunning
+  } = useCountdownTimer({
+    timer: time, 
+    autostart: false,
+    onExpire: () => {nextPicture()}
+  });
 
-
+  console.log("Is running: ", isRunning)
   function nextPicture() {
     tapSound()
+    if(modalOpened && useTimer){
+      reset()
+      start()
+    }
+    
     setArrayPos(pos => {
       const newPos = pos + 1;
       setRandomImage(imageArray.at(newPos));
@@ -92,10 +127,18 @@ function App() {
   function openModal(){
     setModalOpened(true)
     document.addEventListener('keydown', modalHandleKeyDown);
+    if(useTimer){
+      reset()
+      start()
+    }
   }
   function closeModal(){
     setModalOpened(false)
     document.removeEventListener('keydown', modalHandleKeyDown);
+    if(useTimer){
+      reset()
+      pause()
+    }
   }
 
   const modalHandleKeyDown = (event) => {
@@ -167,7 +210,7 @@ function App() {
                     </label>
                   ))}
                 </div>
-                <p className="mt-2">You selected <strong>{time / 1000}s</strong> per session</p>
+                <p className="mt-2">You selected <strong>{formatTime(time / 1000)}</strong> per session</p>
               </>
             )}
           </div>
@@ -196,18 +239,23 @@ function App() {
         <img src={`public/images/${selectedFolder}/${randomImage}`} alt="Image" />
         <div className="modal-controls">
           <button className="hover:bg-white/20 rounded-full p-2 transition cursor-pointer" onClick={lastPicture}>
-            <ChevronLeft className="w-10 h-10"/>
+            <ChevronLeft className="w-10 h-10" color="#f6f9e3b3"/>
           </button>
           <button className="hover:bg-white/20 rounded-full p-2 transition cursor-pointer">
-            <Pause className="w-10 h-10"/>
+            <Pause className="w-10 h-10" color="#f6f9e3b3"/>
           </button>
           <button className="hover:bg-white/20 rounded-full p-2 transition cursor-pointer" onClick={nextPicture}>
-            <ChevronRight className="w-10 h-10"/>
+            <ChevronRight className="w-10 h-10" color="#f6f9e3b3"/>
           </button>
         </div>
+        {useTimer ? <div className="stopwatch">
+          {formatTime(countdown / 1000)}s
+        </div> : <></>}
       </div> : <></>}
     </>
   );
 };
 
 export default App
+
+
