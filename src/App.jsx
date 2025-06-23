@@ -5,7 +5,7 @@ import { folders as folderOptions } from "../generateImageList.cjs";
 import Background from "./Background.jsx";
 
 const sessionOptions = [
-  { label: '30s', value: 5000 },
+  { label: '30s', value: 30000 },
   { label: '1m', value: 60000 },
   { label: '2m', value: 120000 },
   { label: '5m', value: 300000 },
@@ -86,7 +86,7 @@ function App() {
     }
   }
 
-  function pictureClicked(){
+  function openModal(){
     setModalOpened(true)
     document.addEventListener('keydown', modalHandleKeyDown);
   }
@@ -122,7 +122,7 @@ function App() {
     <>
     <Background img={`public/images/${selectedFolder}/${randomImage}`}/>
       <div className="app-container"> {/*Container for App Elements*/}
-        <div className="picture-display-container" onClick={pictureClicked}>
+        <div className="picture-display-container" onClick={openModal}>
           <PictureDisplay 
           img={`public/images/${selectedFolder}/${randomImage}`}/>
         </div>
@@ -135,7 +135,7 @@ function App() {
                 type="checkbox"
                 checked={useTimer}
                 onChange={(e) => setUseTimer(e.target.checked)}
-                className="mr-2"
+                className="mr-2 scale-125 accent-green-900"
               />
               Use timer
             </label>
@@ -152,7 +152,7 @@ function App() {
                         value={option.value}
                         checked={time === option.value}
                         onChange={handleRadioChange}
-                        className="mr-2"
+                        className="mr-2 accent-green-700 scale-125"
                       />
                       {option.label}
                     </label>
