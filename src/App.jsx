@@ -7,7 +7,7 @@ import Background from "./Background.jsx";
 const sessionOptions = [
   { label: '30s', value: 5000 },
   { label: '1m', value: 60000 },
-  { label: '1m', value: 120000 },
+  { label: '2m', value: 120000 },
   { label: '5m', value: 300000 },
   { label: '30m', value: 1800000 },
 ];
@@ -19,6 +19,16 @@ function getRandomIntInclusive(min, max) {
 }
 
 let imageArray = []
+/*
+function shuffleArray(array) {
+  const newArray = [...array]; // copy to avoid modifying original
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]]; // swap
+  }
+  return newArray;
+}*/
+
 for (let i = 0; i < 512; i++) {
   // Code to be executed 512 times
   imageArray.push(imageList['Photos'].at(getRandomIntInclusive(0, imageList['Photos'].length)))
@@ -28,7 +38,7 @@ for (let i = 0; i < 512; i++) {
 function App() {
   const [arrayPos, setArrayPos] = useState(0)
   const [time, setTime] = useState(5000);   
-
+  const [useTimer, setUseTimer] = useState(false);
 
   const [selectedFolder, setSelectedFolder] = useState('Photos')
   
@@ -118,25 +128,39 @@ function App() {
         </div>
         <div className="controls">
           <h2>Drawing References</h2>
-          <p>Choose a theme and find inspirations. <br /> Fuel your art. Find the perfect pose, scene, or mood. </p>
+          {useTimer ? <></> : <p>Choose a theme and find inspirations. <br /> Fuel your art. Find the perfect pose, scene, or mood. </p>}
           <div className="time-select">
-            <p className="mt-2">Select session time</p>
-            <div className="flex flex-wrap gap-4">
-              {sessionOptions.map((option) => (
-                <label key={option.value} className="block">
-                <input
-                  type="radio"
-                  name="time-select"
-                  value={option.value}
-                  checked={time === option.value}
-                  onChange={handleRadioChange}
-                  className="mr-2"
-                />
-                {option.label}
-                </label>
-              ))}
-            </div>
-            <p className="mt-2">You selected <strong>{time / 1000}s</strong> per session</p>
+            <label>
+              <input
+                type="checkbox"
+                checked={useTimer}
+                onChange={(e) => setUseTimer(e.target.checked)}
+                className="mr-2"
+              />
+              Use timer
+            </label>
+
+            {useTimer && (
+              <>
+                <p className="mt-2">Select session time</p>
+                <div className="flex flex-wrap gap-4">
+                  {sessionOptions.map((option) => (
+                    <label key={option.value} className="block">
+                      <input
+                        type="radio"
+                        name="time-select"
+                        value={option.value}
+                        checked={time === option.value}
+                        onChange={handleRadioChange}
+                        className="mr-2"
+                      />
+                      {option.label}
+                    </label>
+                  ))}
+                </div>
+                <p className="mt-2">You selected <strong>{time / 1000}s</strong> per session</p>
+              </>
+            )}
           </div>
           <select
             id="selector"
@@ -161,6 +185,9 @@ function App() {
       {modalOpened ? <div className="modal" id='modal' style={{display: `${modalOpened ? 'flex ' : 'none'}`}}>
         <span className="close" onClick={closeModal}>&times;</span>
         <img src={`public/images/${selectedFolder}/${randomImage}`} alt="Image" />
+        <div className="modalcontrols">
+          
+        </div>
       </div> : <></>}
     </>
   );
