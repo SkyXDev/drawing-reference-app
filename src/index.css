@@ -67,32 +67,42 @@
 }
 
 
+.button-container{
+  display: flex;
+}
 
-.next-btn {
+.next-btn{
+  
+  background-color: #75acb4;
+}
+.session-btn{
+  background-color: #b49f75;
+}
+.next-btn, .session-btn {
   font-family: 'Times New Roman', Times, serif;
   text-wrap: nowrap;
   display: inline-block;
   border-radius: 4px;
-  background-color: #75acb4;
   border: none;
   color: #FFFFFF;
   text-align: center;
   font-size: 28px;
-  padding: 20px;
-  width: 300px;
+  padding: 15px;
+  width: 200px;
   transition: all 0.5s;
   cursor: pointer;
-  margin: 5px;
+  margin: 7px;
+  border-radius: 32px;
 }
 
-.next-btn span {
+.next-btn span, .session-btn span {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.5s;
 }
 
-.next-btn span:after {
+.next-btn span:after, .session-btn span::after {
   content: '\00bb';
   position: absolute;
   opacity: 0;
@@ -101,11 +111,11 @@
   transition: 0.5s;
 }
 
-.next-btn:hover span {
+.next-btn:hover span, .session-btn:hover span {
   padding-right: 25px;
 }
 
-.next-btn:hover span:after {
+.next-btn:hover span:after, .session-btn:hover span:after {
   opacity: 1;
   right: 0;
 }
@@ -133,7 +143,7 @@ p{
   font-family: 'Times New Roman', Times, serif;
   font-size: 20px;
   text-align: center;
-  font-weight: 400;
+  font-weight: 600;
 }
 
 .modal{

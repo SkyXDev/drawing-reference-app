@@ -163,6 +163,7 @@ function App() {
 
   const handleRadioChange = (e) => {
     setTime(Number(e.target.value)); // Convert value to number (it's a string by default)
+    tapSound()
   };
 
 
@@ -193,7 +194,10 @@ function App() {
               <input
                 type="checkbox"
                 checked={useTimer}
-                onChange={(e) => setUseTimer(e.target.checked)}
+                onChange={(e) => {
+                  setUseTimer(e.target.checked)
+                  tapSound()
+                }}
                 className="mr-2 scale-125 accent-green-900"
               />
               Use timer
@@ -234,11 +238,18 @@ function App() {
               </option>
             ))}
           </select>
-          <button className="next-btn" onClick={() => {
-            nextButtonClick()
-          }}>
-            <span>Next picture</span>
-          </button>
+          <div className="button-container">
+            <button className="next-btn" onClick={() => {
+              nextButtonClick()
+            }}>
+              <span>Next picture</span>
+            </button>
+            <button className="session-btn" onClick={() => {
+              openModal()
+            }}>
+              <span>Start Session</span>
+            </button>
+          </div>
         </div>
       </div>
       {modalOpened ? <div className="modal" id='modal' style={{display: `${modalOpened ? 'flex ' : 'none'}`}}>
@@ -249,7 +260,7 @@ function App() {
             <ChevronLeft className="w-10 h-10" color="#f6f9e3b3"/>
           </button>
           <button className="hover:bg-white/20 rounded-full p-2 transition cursor-pointer">
-            <Pause className="w-10 h-10" color="#f6f9e3b3"/>
+            {isRunning && useTimer ? <Pause className="w-10 h-10" color="#f6f9e3b3" onClick={pause}/> : <Play className="w-10 h-10" color="#f6f9e3b3" onClick={start}/>}
           </button>
           <button className="hover:bg-white/20 rounded-full p-2 transition cursor-pointer" onClick={nextPicture}>
             <ChevronRight className="w-10 h-10" color="#f6f9e3b3"/>
