@@ -14,6 +14,10 @@ const sessionOptions = [
   { label: '30m', value: 1800000 },
 ];
 
+
+
+
+
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min); // Ensures min is an integer
   max = Math.floor(max); // Ensures max is an integer
@@ -37,7 +41,7 @@ function formatTime(seconds) {
 }
 
 
-let imageArray = []
+//let imageArray = []
 
 function shuffleArray(array) {
   const newArray = [...array]; // copy to avoid modifying original
@@ -48,24 +52,25 @@ function shuffleArray(array) {
   return newArray;
 }
 
-
+/*
 for (let i = 0; i < 512; i++) {
   // Code to be executed 512 times
   imageArray.push(imageList['Photos'].at(getRandomIntInclusive(0, imageList['Photos'].length)))
-}
+}*/
 
 
 function App() {
   const [arrayPos, setArrayPos] = useState(0)
   const [time, setTime] = useState(30000);   
   const [useTimer, setUseTimer] = useState(false);
-
-  const [selectedFolder, setSelectedFolder] = useState('Photos')
   
+  const [selectedFolder, setSelectedFolder] = useState('Photos')
+  const [imageArray, setImageArray] = useState(shuffleArray(imageList[selectedFolder]));
   const [randomImage, setRandomImage] = useState(imageArray.at(arrayPos)) 
 
   const [modalOpened, setModalOpened] = useState(false)
 
+  
   const {
     countdown,
     start,
@@ -78,7 +83,7 @@ function App() {
     onExpire: () => {nextPicture()}
   });
 
-  console.log("Is running: ", isRunning)
+  
   function nextPicture() {
     tapSound()
     if(modalOpened && useTimer){
@@ -109,13 +114,10 @@ function App() {
 
   function selectChange(e){
     setSelectedFolder(e.target.value)
-    imageArray.length = 0
-    for (let i = 0; i < 512; i++) {
-      // Code to be executed 512 times
-      imageArray.push(imageList[e.target.value].at(getRandomIntInclusive(0, imageList[e.target.value].length)))
-    }
+    const newShuffledArray = shuffleArray(imageList[e.target.value]);
+    setImageArray(newShuffledArray);
     setArrayPos(0)
-    setRandomImage(imageArray.at(0))
+    setRandomImage(newShuffledArray.at(0))
     const frame = document.querySelector('.picture-frame')
     if(e.target.value === 'Scenes'){
       frame.style.aspectRatio = "1/1";
@@ -169,7 +171,12 @@ function App() {
     const audio = new Audio('../public/mixkit-on-or-off-light-switch-tap-2585.wav'); 
     audio.play();
   };
-  
+/*
+  const debug = {
+    printImageArray: () => console.log("imageArray: ", imageArray),
+    printArrayPos: () => console.log("arrayPos: ", arrayPos),
+    printTimerIsRunning: () => console.log("isRunning: ", isRunning)
+  };*/
   return (
     <>
     <Background img={`public/images/${selectedFolder}/${randomImage}`}/>
