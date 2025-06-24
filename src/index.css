@@ -17,8 +17,8 @@
   /*background: linear-gradient(135deg,rgb(204, 211, 176) 0%, rgb(183, 210, 207) 50%, rgb(136, 147, 160) 100%);*/
   background: linear-gradient(135deg, rgba(255, 247, 239, 0.95), rgba(236, 251, 255, 0.75));
   display: grid;
-  grid-template-columns: 1fr 1fr 20px;
-  grid-gap: 50px;
+  grid-template-columns: 1fr 1fr 10px;
+  grid-gap: 30px;
   justify-content: center;
   align-content: center;
 }
@@ -55,14 +55,14 @@
 
 .controls{
   height: 80vh;
-  background-color: rgba(157, 157, 157, 0.514);
+  background-color: rgba(138, 138, 138, 0.2);
   z-index: 1;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  padding: 60px;
+  padding: 50px;
 }
 
 
@@ -190,8 +190,8 @@ p{
 .modal-controls{
   background-color: rgba(0, 0, 0, 0.5);
   position: absolute;
-  height: 100px;
-  width: 300px;
+  height: 90px;
+  width: 270px;
   bottom: 60px;
   border-radius: 12px;
   opacity: 0;
@@ -210,8 +210,8 @@ p{
   color: #FFFFFF;
   background-color: rgba(0, 0, 0, 0.5);
   position: absolute;
-  height: 70px;
-  width: 200px;
+  height: 60px;
+  width: 180px;
   bottom: 60px;
   right: 40px;
   border-radius: 12px;
@@ -220,11 +220,111 @@ p{
   align-items: center;
   justify-content: space-around;
   z-index: 5;
-  border-radius: 35px;
+  border-radius: 30px;
   font-size: 24px;
   transition: all .3s;
 }
 
 .stopwatch:hover{
   background-color: rgba(70, 70, 70, 0.5);
+}
+
+@media (max-width: 1280px) {
+  .controls{
+    padding: 20px;
+  }
+  .app-container{
+    grid-gap: 20px;
+  }
+  h2{
+    font-size: 50px;
+  }
+}
+
+@media (max-width: 1080px) {
+  /*.next-btn{
+    display: none;
+  }*/
+  .next-btn, .session-btn {
+    font-size: 24px;
+    padding: 12px;
+    width: 170px;
+    margin: 5px;
+    border-radius: 32px;
+  }
+  .app-container{
+    grid-gap: 15px;
+  }
+  h2{
+    font-size: 40px;
+  }
+  p{
+    font-size: 18px;
+  }
+  .app-container{
+    top: 25px;
+    bottom: 25px;
+    left: 25px;
+    right: 25px;
+  }
+  .stopwatch{
+    width: 144px;
+  }
+}
+
+@media (max-width: 860px) {
+  
+  .app-container{
+    grid-gap: 10px;
+  }
+  p{
+    font-size: 20px;
+  }
+  .next-btn, .session-btn {
+    font-size: 20px;
+    padding: 10px;
+    width: 160px;
+    margin: 5px;
+    border-radius: 32px;
+  }
+  .app-container{
+    top: 20px;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+  }
+}
+@media (max-width: 767px) {
+  .next-btn{
+    display: none;
+  }
+  .picture-display-container{
+    display: none;
+  }
+  .app-container{
+    grid-template-columns: 1fr;
+  }
+  .controls{
+    margin-left: 30px;
+    background-color: rgba(184, 184, 184, 0.2);
+    margin-right: 30px;
+  }
+  h2{
+    font-size: 50px;
+  }
+  .app-container{
+    background: linear-gradient(135deg, rgba(251, 236, 222, 0.9), rgba(216, 245, 253, 0.6));
+  }
+  .stopwatch{
+    width: 120px;
+    height: 50px;
+    top: 40px;
+    left: 50%;
+    margin-left: -60px;
+  }
+}
+@media (max-width: 576px) {
+  h2{
+    font-size: 40px;
+  }
 }

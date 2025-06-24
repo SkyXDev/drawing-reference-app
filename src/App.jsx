@@ -5,6 +5,7 @@ import { folders as folderOptions } from "../generateImageList.cjs";
 import Background from "./Background.jsx";
 import { Play, Pause, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useCountdownTimer } from 'use-countdown-timer';
+import { span } from "motion/react-client";
 
 const sessionOptions = [
   { label: '30s', value: 30000 },
@@ -15,7 +16,17 @@ const sessionOptions = [
 ];
 
 
+function useScreenWidth() {
+  const [width, setWidth] = useState(window.innerWidth);
 
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return width;
+}
 
 
 function getRandomIntInclusive(min, max) {
@@ -70,7 +81,7 @@ function App() {
 
   const [modalOpened, setModalOpened] = useState(false)
 
-  
+  const screenWidth = useScreenWidth()
   const {
     countdown,
     start,
@@ -118,13 +129,22 @@ function App() {
     setImageArray(newShuffledArray);
     setArrayPos(0)
     setRandomImage(newShuffledArray.at(0))
+    
     const frame = document.querySelector('.picture-frame')
-    if(e.target.value === 'Scenes'){
-      frame.style.aspectRatio = "1/1";
+    if(screenWidth >= 1080)
+      {if(e.target.value === 'Scenes'){
+        frame.style.aspectRatio = "1/1";
+      }else{
+        frame.style.aspectRatio = "3/4";
+      }
     }else{
       frame.style.aspectRatio = "3/4";
     }
   }
+  //Kinda works as people usually dont resize pages like maniacs
+
+
+
 
   function openModal(){
     setModalOpened(true)
@@ -188,7 +208,7 @@ function App() {
         </div>
         <div className="controls">
           <h2>Drawing References</h2>
-          {useTimer ? <></> : <p>Choose a theme and find inspirations. <br /> Fuel your art. Find the perfect pose, scene, or mood. </p>}
+          {useTimer ? <></> : <p>Choose a theme and find inspirations. <br /> {(screenWidth > 860) ? <span>Fuel your art. Find the perfect pose, scene, or mood.</span> : <></>} </p>}
           <div className="time-select">
             <label>
               <input
@@ -267,7 +287,7 @@ function App() {
           </button>
         </div>
         {useTimer ? <div className="stopwatch">
-          {formatTime(countdown / 1000)}s
+          {formatTime(countdown / 1000)}
         </div> : <></>}
       </div> : <></>}
     </>
