@@ -7,7 +7,6 @@
 }
 
 
-
 .app-container{
   position: absolute;
   top: 30px;
@@ -177,8 +176,9 @@ p{
 .background-img{
   width: 100%;
   z-index: -2;
-  filter: blur(16px) saturate(20%);
+  filter: blur(16px) saturate(30%);
   transition: all .3s ease-in-out;
+  height: 100vh;
 }
 
 .time-select label{
