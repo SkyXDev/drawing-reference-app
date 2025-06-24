@@ -29,4 +29,5 @@ folders.forEach((folderName) => {
 // Write result to JSON
 fs.writeFileSync(outputPath, JSON.stringify(imageData, null, 2));
 console.log('✅ imageList.json generated in /public/images');
+
 */
