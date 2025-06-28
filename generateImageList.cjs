@@ -1,7 +1,8 @@
 // List of subfolders inside /public/images
 export const folders = ['Photos', 'Traditional Art', 'Scenes'];
 //Uncomment the script when in need and remove export
-/*const fs = require('fs');
+/*
+const fs = require('fs');
 const path = require('path');
 
 
