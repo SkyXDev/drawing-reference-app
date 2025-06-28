@@ -207,7 +207,7 @@ function App() {
           img={`public/images/${selectedFolder}/${randomImage}`}/>
         </div>
         <div className="controls">
-          <h2>Drawing References</h2>
+          <h2>Visual Library</h2>
           {useTimer ? <></> : <p>Choose a theme and find inspirations. <br /> {(screenWidth > 860) ? <span>Fuel your art. Find the perfect pose, scene, or mood.</span> : <></>} </p>}
           <div className="time-select">
             <label>
