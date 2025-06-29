@@ -138,11 +138,16 @@ function App() {
   
 
   function selectChange(e){
-    setSelectedFolder(e.target.value)
-    const newShuffledArray = shuffleArray(imageList[e.target.value]);
+    const folder = e.target.value;
+    setSelectedFolder(folder);
+
+    const newShuffledArray = shuffleArray(imageList[folder]);
     setImageArray(newShuffledArray);
-    setArrayPos(0)
-    //setRandomImage(newShuffledArray.at(0))
+    setArrayPos(0);
+
+    const preloadURL = `${import.meta.env.BASE_URL}images/${folder}/${newShuffledArray[0]}`;
+    preloadImage(preloadURL);
+
     
     const frame = document.querySelector('.picture-frame')
     if(screenWidth >= 1080)
