@@ -1,6 +1,11 @@
 import PictureDisplay from "./PictureDisplay.jsx"
 import { useEffect, useState } from 'react';
-import imageList from '../public/images/imageList.json' with { type: 'json' };
+//import imageList from '../public/images/imageList.json' with { type: 'json' };
+
+const response = await fetch('/images/imageList.json');
+const imageList = await response.json();
+
+
 import Background from "./Background.jsx";
 import { Play, Pause, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useCountdownTimer } from 'use-countdown-timer';
@@ -189,7 +194,7 @@ function App() {
 
 
   const tapSound = () => {
-    const audio = new Audio('../public/mixkit-on-or-off-light-switch-tap-2585.wav'); 
+    const audio = new Audio(`${import.meta.env.BASE_URL}mixkit-on-or-off-light-switch-tap-2585.wav`); 
     audio.play();
   };
 /*
@@ -200,11 +205,11 @@ function App() {
   };*/
   return (
     <>
-    <Background img={`public/images/${selectedFolder}/${randomImage}`}/>
+    <Background img={`${import.meta.env.BASE_URL}images/${selectedFolder}/${randomImage}`}/>
       <div className="app-container"> {/*Container for App Elements*/}
         <div className="picture-display-container" onClick={openModal}>
           <PictureDisplay 
-          img={`public/images/${selectedFolder}/${randomImage}`}/>
+          img={`${import.meta.env.BASE_URL}images/${selectedFolder}/${randomImage}`}/>
         </div>
         <div className="controls">
           <h2>Visual Library</h2>
@@ -274,7 +279,7 @@ function App() {
       </div>
       {modalOpened ? <div className="modal" id='modal' style={{display: `${modalOpened ? 'flex ' : 'none'}`}}>
         <span className="close" onClick={closeModal}>&times;</span>
-        <img src={`public/images/${selectedFolder}/${randomImage}`} alt="Image" />
+        <img src={`${import.meta.env.BASE_URL}images/${selectedFolder}/${randomImage}`} alt="Image" />
         <div className="modal-controls">
           <button className="hover:bg-white/20 rounded-full p-2 transition cursor-pointer" onClick={lastPicture}>
             <ChevronLeft className="w-10 h-10" color="#f6f9e3b3"/>

@@ -1,4 +1,6 @@
 // List of subfolders inside /public/images
+
+/*
 const folders = ['Photos', 'Traditional Art', 'Scenes'];
 //Uncomment the script when in need and remove export
 
@@ -31,3 +33,4 @@ folders.forEach((folderName) => {
 fs.writeFileSync(outputPath, JSON.stringify(imageData, null, 2));
 console.log('✅ imageList.json generated in /public/images');
 
+*/
