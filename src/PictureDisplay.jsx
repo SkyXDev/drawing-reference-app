@@ -4,7 +4,7 @@ const PictureDisplay = (props) => {
 	
   return (
 	<div className='picture-frame'>
-		<img src={props.img} alt="Image" className=''/>
+		<img src={props.img} className=''/>
 	</div>
   )
 }

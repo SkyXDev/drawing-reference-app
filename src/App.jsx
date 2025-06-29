@@ -203,11 +203,12 @@ function App() {
   };*/
   return (
     <>
-    <Background img={`${import.meta.env.BASE_URL}images/${selectedFolder}/${randomImage}`}/>
+    {modalOpened ? <></> : <Background img={`${import.meta.env.BASE_URL}images/${selectedFolder}/${randomImage}`}/>}
       <div className="app-container"> {/*Container for App Elements*/}
         <div className="picture-display-container" onClick={openModal}>
-          <PictureDisplay 
-          img={`${import.meta.env.BASE_URL}images/${selectedFolder}/${randomImage}`}/>
+          {modalOpened ? <PictureDisplay 
+          img={`src/dummy_400x400_cccccc_cccccc.png`}/> : <PictureDisplay 
+          img={`${import.meta.env.BASE_URL}images/${selectedFolder}/${randomImage}`}/>}
         </div>
         <div className="controls">
           <h2>Visual Library</h2>

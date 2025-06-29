@@ -328,3 +328,7 @@ p{
     font-size: 40px;
   }
 }
+
+.picture-display-container img, .background-img, .modal img {
+  will-change: transform;
+}
