@@ -1,11 +1,9 @@
 import PictureDisplay from "./PictureDisplay.jsx"
 import { useEffect, useState } from 'react';
 import imageList from '../public/images/imageList.json' with { type: 'json' };
-//import { folders as folderOptions } from "../generateImageList.cjs";
 import Background from "./Background.jsx";
 import { Play, Pause, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useCountdownTimer } from 'use-countdown-timer';
-import { span } from "motion/react-client";
 
 const folderOptions = ['Photos', 'Traditional Art', 'Scenes'];
 
