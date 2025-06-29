@@ -1,11 +1,6 @@
 import PictureDisplay from "./PictureDisplay.jsx"
 import { useEffect, useState } from 'react';
 import imageList from '../public/images/imageList.json' with { type: 'json' };
-/*
-const response = await fetch('/images/imageList.json');
-const imageList = await response.json();
-*/
-
 import Background from "./Background.jsx";
 import { Play, Pause, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useCountdownTimer } from 'use-countdown-timer';
@@ -75,6 +70,9 @@ for (let i = 0; i < 512; i++) {
 }*/
 const tap = new Audio(`${import.meta.env.BASE_URL}mixkit-on-or-off-light-switch-tap-2585.wav`);
 tap.volume = 0.5;
+
+
+
 
 function App() {
   const [arrayPos, setArrayPos] = useState(0)
