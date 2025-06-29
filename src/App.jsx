@@ -80,7 +80,7 @@ function App() {
   const [arrayPos, setArrayPos] = useState(0)
   const [time, setTime] = useState(30000);   
   const [useTimer, setUseTimer] = useState(false);
-  
+  const [imgLoaded, setImgLoaded] = useState(false);
   const [selectedFolder, setSelectedFolder] = useState('Photos')
   const [imageArray, setImageArray] = useState(shuffleArray(imageList[selectedFolder]));
   //const [randomImage, setRandomImage] = useState(imageArray.at(arrayPos)) 
@@ -278,7 +278,9 @@ function App() {
       </div>
       {modalOpened ? <div className="modal" id='modal' style={{display: `${modalOpened ? 'flex ' : 'none'}`}}>
         <span className="close" onClick={closeModal}>&times;</span>
-        <img src={`${import.meta.env.BASE_URL}images/${selectedFolder}/${randomImage}`} alt="Image" loading="lazy"/>
+        <img src={`${import.meta.env.BASE_URL}images/${selectedFolder}/${randomImage}`} alt="Image" className={imgLoaded ? '' : 'loading'}
+  onLoad={() => setImgLoaded(true)}
+  loading="lazy"/>
         <div className="modal-controls">
           <button className="hover:bg-white/20 rounded-full p-2 transition cursor-pointer" onClick={lastPicture}>
             <ChevronLeft className="w-10 h-10" color="#f6f9e3b3"/>
