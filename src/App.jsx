@@ -72,7 +72,10 @@ const tap = new Audio(`${import.meta.env.BASE_URL}mixkit-on-or-off-light-switch-
 tap.volume = 0.5;
 
 
-
+function preloadImage(url) {
+  const img = new Image();
+  img.src = url;
+}
 
 function App() {
   const [arrayPos, setArrayPos] = useState(0)
@@ -99,23 +102,32 @@ function App() {
 
   
   function nextPicture() {
-    
-    
-    
-    setArrayPos(pos => pos + 1);
-    tapSound()
-    if(modalOpened && useTimer){
-      reset()
-      start()
+    const nextPos = arrayPos + 1;
+
+    // Preload nächstes Bild (wenn vorhanden)
+    const nextImage = imageArray?.[nextPos];
+    if (nextImage) {
+      const url = `${import.meta.env.BASE_URL}images/${selectedFolder}/${nextImage}`;
+      preloadImage(url);
+    }
+
+    // Wechsel zum nächsten Bild
+    setArrayPos(nextPos);
+    tapSound();
+
+    if (modalOpened && useTimer) {
+      reset();
+      start();
     }
   }
   function lastPicture() {
-    
-    setArrayPos(pos => pos - 1);
-    tapSound()
-    if(modalOpened && useTimer){
-      reset()
-      start()
+    if (arrayPos > 0) {
+      setArrayPos(pos => pos - 1);
+      tapSound();
+      if (modalOpened && useTimer) {
+        reset();
+        start();
+      }
     }
   }
   
