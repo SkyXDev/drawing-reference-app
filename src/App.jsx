@@ -86,7 +86,6 @@ function App() {
   //const [randomImage, setRandomImage] = useState(imageArray.at(arrayPos)) 
   const randomImage = imageArray?.[arrayPos];
   const [modalOpened, setModalOpened] = useState(false)
-
   const screenWidth = useScreenWidth()
   const {
     countdown,
@@ -114,7 +113,7 @@ function App() {
   }
   function lastPicture() {
     
-    setArrayPos(pos => pos + 1);
+    setArrayPos(pos => pos - 1);
     tapSound()
     if(modalOpened && useTimer){
       reset()
