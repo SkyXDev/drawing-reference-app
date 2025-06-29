@@ -1,7 +1,7 @@
 // List of subfolders inside /public/images
-export const folders = ['Photos', 'Traditional Art', 'Scenes'];
+const folders = ['Photos', 'Traditional Art', 'Scenes'];
 //Uncomment the script when in need and remove export
-/*
+
 const fs = require('fs');
 const path = require('path');
 
@@ -31,4 +31,3 @@ folders.forEach((folderName) => {
 fs.writeFileSync(outputPath, JSON.stringify(imageData, null, 2));
 console.log('✅ imageList.json generated in /public/images');
 
-*/
