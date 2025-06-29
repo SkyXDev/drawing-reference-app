@@ -83,8 +83,8 @@ function App() {
   
   const [selectedFolder, setSelectedFolder] = useState('Photos')
   const [imageArray, setImageArray] = useState(shuffleArray(imageList[selectedFolder]));
-  const [randomImage, setRandomImage] = useState(imageArray.at(arrayPos)) 
-
+  //const [randomImage, setRandomImage] = useState(imageArray.at(arrayPos)) 
+  const randomImage = imageArray?.[arrayPos];
   const [modalOpened, setModalOpened] = useState(false)
 
   const screenWidth = useScreenWidth()
@@ -105,11 +105,7 @@ function App() {
     
     
     
-    setArrayPos(pos => {
-      const newPos = pos + 1;
-      setRandomImage(imageArray.at(newPos));
-      return newPos;
-    });
+    setArrayPos(pos => pos + 1);
     tapSound()
     if(modalOpened && useTimer){
       reset()
@@ -118,11 +114,7 @@ function App() {
   }
   function lastPicture() {
     
-    setArrayPos(pos => {
-      const newPos = pos - 1;
-      setRandomImage(imageArray.at(newPos));
-      return newPos;
-    });
+    setArrayPos(pos => pos + 1);
     tapSound()
     if(modalOpened && useTimer){
       reset()
@@ -141,7 +133,7 @@ function App() {
     const newShuffledArray = shuffleArray(imageList[e.target.value]);
     setImageArray(newShuffledArray);
     setArrayPos(0)
-    setRandomImage(newShuffledArray.at(0))
+    //setRandomImage(newShuffledArray.at(0))
     
     const frame = document.querySelector('.picture-frame')
     if(screenWidth >= 1080)
@@ -286,7 +278,7 @@ function App() {
       </div>
       {modalOpened ? <div className="modal" id='modal' style={{display: `${modalOpened ? 'flex ' : 'none'}`}}>
         <span className="close" onClick={closeModal}>&times;</span>
-        <img src={`${import.meta.env.BASE_URL}images/${selectedFolder}/${randomImage}`} alt="Image" />
+        <img src={`${import.meta.env.BASE_URL}images/${selectedFolder}/${randomImage}`} alt="Image" loading="lazy"/>
         <div className="modal-controls">
           <button className="hover:bg-white/20 rounded-full p-2 transition cursor-pointer" onClick={lastPicture}>
             <ChevronLeft className="w-10 h-10" color="#f6f9e3b3"/>
